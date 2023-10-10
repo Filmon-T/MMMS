@@ -4,22 +4,24 @@ const workOrderFormat = new mongoose.Schema(
    {
       entranceDate: {
          type: String,
-         required: [true, 'Please enter the name of the army!'],
+         required: [true, 'Please enter the entrance date!'],
+      },
+      activityDescription: {
+         type: String,
+         required: [true, 'Please enter the description of the activity!'],
+      },
+      mechanicName: {
+         type: String,
+         required: [true, 'Please enter the name of the mechanic!'],
+      },
+      // -----------------
+      approvedBy: {
+         type: String,
       },
       exitDate: {
          type: String,
       },
-      activityDescription: {
-         type: String,
-      },
       remark: {
-         type: String,
-      },
-      mechanicName: {
-         type: String,
-         required: [true, 'Please enter the name of commander of the army!'],
-      },
-      approvedBy: {
          type: String,
       },
    },
@@ -31,7 +33,7 @@ const workOrderFormat = new mongoose.Schema(
       toObj: {
          virtuals: true,
       },
-   }
+   },
 )
 
 module.exports = mongoose.model('WorkOrderFormat', workOrderFormat)

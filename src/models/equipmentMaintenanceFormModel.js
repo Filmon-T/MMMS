@@ -2,26 +2,24 @@ const mongoose = require('mongoose')
 
 const equipmentMaintenanceSchema = new mongoose.Schema(
    {
-      OperatorName: {
+      operatorName: {
          type: String,
          required: [true, 'Please enter operator name!'],
       },
-      OperatorType: {
+      operatorType: {
          type: String,
          required: [true, 'Please specify the operator type!'],
       },
-      PlateNumber: {
+      parseIntlateNumber: {
          type: String,
          required: [true, 'Please enter the plate number!'],
       },
-      Remark: {
-         type: String,
+      remark: {
+         type: String, // inspector updates this
       },
-      ApprovedBy: {
-         type: String,
-      },
-      report: {
-         type: String,
+      // -------------
+      approvedBy: {
+         type: String, // inspector approves this -- when approved ot goes to mechanic
       },
    },
    {
@@ -32,10 +30,7 @@ const equipmentMaintenanceSchema = new mongoose.Schema(
       toObj: {
          virtuals: true,
       },
-   }
+   },
 )
 
-module.exports = mongoose.model(
-   'EquipmentMaintenance',
-   equipmentMaintenanceSchema
-)
+module.exports = mongoose.model('EquipmentMaintenance', equipmentMaintenanceSchema)

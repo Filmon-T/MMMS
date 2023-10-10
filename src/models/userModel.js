@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema(
 
       role: {
          type: String,
-         enum: ['EqAdmin', 'inspector', 'mechanic'],
+         enum: ['eqAdmin', 'inspector', 'mechanic'],
          default: 'mechanic',
       },
 
@@ -49,7 +49,7 @@ const userSchema = new mongoose.Schema(
       toObj: {
          virtuals: true,
       },
-   }
+   },
 )
 
 userSchema.pre('save', async function (next) {
@@ -72,10 +72,7 @@ userSchema.pre(/^find/, function (next) {
    next()
 })
 
-userSchema.methods.correctPassword = async function (
-   candidatePassword,
-   userPassword
-) {
+userSchema.methods.correctPassword = async function (candidatePassword, userPassword) {
    return await bcrypt.compare(candidatePassword, userPassword)
 }
 

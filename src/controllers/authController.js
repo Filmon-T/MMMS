@@ -22,14 +22,6 @@ const signToken = (id, role) => {
 const createSendToken = (user, statusCode, res) => {
    const token = signToken(user._id, user.role)
 
-   // const cookieOptions = {
-   //    expires: new Date(
-   //       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
-   //    ),
-   //    httpOnly: true,
-   // }
-   // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true
-
    // Check this out if you want to store cookies in the browser for front end frameworks other than VUE.JS
    // res.cookie('jwt', token, cookieOptions)
 
@@ -46,7 +38,6 @@ const createSendToken = (user, statusCode, res) => {
 }
 
 exports.signup = catchAsync(async (req, res, next) => {
-   // console.log(req.user.role)
    req.body.createdTime = moment(Date.now()).format('dddd, MMMM D, YYYY h:mm:ss A')
    const newUser = await User.create(req.body)
    createSendToken(newUser, 201, res)
@@ -74,7 +65,6 @@ exports.login = catchAsync(async (req, res, next) => {
 })
 
 exports.logout = (req, res) => {
-   // console.log(req.cookies)
    res.cookie('jwt', null, {
       expires: new Date(Date.now()),
       httpOnly: true,
@@ -98,9 +88,9 @@ exports.protect = catchAsync(async (req, res, next) => {
    if (!token) {
       return next(new AppError('You are not logged in! Please log-in to get access!', 401))
    }
+
    // 2. Verify token
    const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET)
-   //console.log('dd: ', decoded)
 
    // 3. Check if user still exists
    const currentUser = await User.findById(decoded.id)
@@ -270,7 +260,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
    // 3. Send it to user's email
    const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/resetPassword/${resetToken}`
-   console.log(resetURL)
+   // console.log(resetURL)
    const message = `Forgot your password? Submit a Patch request with your new password and confirm password to: ${resetURL}.\n If you didn't forget your password, please ignorethis email!`
 
    try {
@@ -324,7 +314,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 exports.updatePassword = catchAsync(async (req, res, next) => {
    // 1. Get user from collection
    const user = await User.findById(req.user.id).select('+password')
-   // console.log('nay nay')
+
    // 2. Check if posted current password is correct
    if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
       return next(new AppError('Your current password is Incorrect!!', 401))
