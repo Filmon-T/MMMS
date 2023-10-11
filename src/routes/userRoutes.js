@@ -7,6 +7,7 @@ const router = express.Router()
 
 // router.use(authController.protect_vue)
 
+router.post('/signup', authController.signup)
 router.post('/login', authController.login)
 router.get('/logout', authController.protect_vue, authController.logout)
 

@@ -10,7 +10,7 @@ router
    .route('/')
    .get(workOrderFormat.getAllWorkOrderFormat)
    .post(
-      authController.restrictTo('admin'),
+      authController.restrictTo('eqAdmin'),
       workOrderFormat.setUserIds,
       workOrderFormat.createWorkOrderFormat
    )
@@ -18,11 +18,11 @@ router
    .route('/:id')
    .get(workOrderFormat.getWorkOrderFormat)
    .patch(
-      authController.restrictTo('admin'),
+      authController.restrictTo('eqAdmin'),
       workOrderFormat.updateWorkOrderFormat
    )
    .delete(
-      authController.restrictTo('admin'),
+      authController.restrictTo('eqAdmin'),
       workOrderFormat.deleteWorkOrderFormat
    )
 

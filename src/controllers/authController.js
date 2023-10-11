@@ -22,8 +22,6 @@ const signToken = (id, role) => {
 const createSendToken = (user, statusCode, res) => {
    const token = signToken(user._id, user.role)
 
-   // Check this out if you want to store cookies in the browser for front end frameworks other than VUE.JS
-   // res.cookie('jwt', token, cookieOptions)
 
    // Remove password from being despilayed in the output
    user.password = undefined
@@ -38,23 +36,20 @@ const createSendToken = (user, statusCode, res) => {
 }
 
 exports.signup = catchAsync(async (req, res, next) => {
-   req.body.createdTime = moment(Date.now()).format('dddd, MMMM D, YYYY h:mm:ss A')
    const newUser = await User.create(req.body)
    createSendToken(newUser, 201, res)
 })
 
 exports.login = catchAsync(async (req, res, next) => {
-   const { idNumber, password } = req.body
+   const { email, password } = req.body
 
    // 1. Check if email and password exist
-   if (!idNumber || !password) {
-      return next(new AppError('Please provide id Number and password', 400))
+   if (!email || !password) {
+      return next(new AppError('Please provide email and password', 400))
    }
 
    //2. Check if user exists && password is correct
-   const user = await User.findOne({
-      idNumber,
-   }).select('+password')
+   const user = await User.findOne({ email, }).select('+password')
 
    if (!user || !(await user.correctPassword(password, user.password))) {
       return next(new AppError('Incorrect id Number or password', 401))

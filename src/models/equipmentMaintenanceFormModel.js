@@ -10,7 +10,7 @@ const equipmentMaintenanceSchema = new mongoose.Schema(
          type: String,
          required: [true, 'Please specify the operator type!'],
       },
-      parseIntlateNumber: {
+      plateNumber: {
          type: String,
          required: [true, 'Please enter the plate number!'],
       },
