@@ -10,6 +10,10 @@ router
    .get(authController.restrictTo('eqAdmin'), equipmentMaintenanceController.getAllEquipmentMaintenanceForms)
    .post(authController.restrictTo('eqAdmin'), equipmentMaintenanceController.createEquipmentMaintenanceForm)
 
+// Route for the eqAdmin to send an equipmentMaintenanceForm to inspector
+// Route for the inspector to view equipmentMaintenanceForm sent by eqAdmin
+
+// Route for writing remark for equipment maintenance form - by inspector
 // Route for approving equipment maintenance form - by inspector
 
 router
