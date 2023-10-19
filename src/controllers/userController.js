@@ -6,19 +6,14 @@ const moment = require('moment')
 
 exports.getMe = (req, res, next) => {
    req.params.id = req.user.id
-   console.log(req.user)
+   // console.log(req.user)
    next()
 }
 
 exports.updateMe = catchAsync(async (req, res, next) => {
    // 1. Create error if user tries to change password
    if (req.body.password || req.body.passwordConfirm) {
-      return next(
-         new AppError(
-            'This route is not for password updates. Please use /updateMyPassword',
-            400
-         )
-      )
+      return next(new AppError('This route is not for password updates. Please use /updateMyPassword', 400))
    }
 
    // 2. Filter out field names that are not allowed to be updated

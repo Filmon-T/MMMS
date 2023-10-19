@@ -4,26 +4,16 @@ const workOrderFormat = require('../controllers/workOrderFormatController')
 
 const router = express.Router()
 
-router.use(authController.protect_vue)
+router.use(authController.ProtectRoutes)
 
 router
    .route('/')
-   .get(workOrderFormat.getAllWorkOrderFormat)
-   .post(
-      authController.restrictTo('eqAdmin'),
-      workOrderFormat.setUserIds,
-      workOrderFormat.createWorkOrderFormat
-   )
+   .get(authController.restrictTo('eqAdmin'), workOrderFormat.getAllWorkOrderFormat)
+   .post(authController.restrictTo('eqAdmin'), workOrderFormat.createWorkOrderFormat)
 router
    .route('/:id')
-   .get(workOrderFormat.getWorkOrderFormat)
-   .patch(
-      authController.restrictTo('eqAdmin'),
-      workOrderFormat.updateWorkOrderFormat
-   )
-   .delete(
-      authController.restrictTo('eqAdmin'),
-      workOrderFormat.deleteWorkOrderFormat
-   )
+   .get(authController.restrictTo('eqAdmin'), workOrderFormat.getWorkOrderFormat)
+   .patch(authController.restrictTo('eqAdmin'), workOrderFormat.updateWorkOrderFormat)
+   .delete(authController.restrictTo('eqAdmin'), workOrderFormat.deleteWorkOrderFormat)
 
 module.exports = router

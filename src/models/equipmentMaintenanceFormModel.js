@@ -19,7 +19,7 @@ const equipmentMaintenanceSchema = new mongoose.Schema(
       },
       // -------------
       approvedBy: {
-         type: String, // inspector approves this -- when approved ot goes to mechanic
+         type: String, // inspector approves this -- when approved it goes to mechanic
       },
    },
    {

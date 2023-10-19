@@ -5,9 +5,6 @@ exports.setUserIds = (req, res, next) => {
    if (!req.body.user) {
       req.body.user = req.user.id
    }
-   if (!req.body.sender) {
-      req.body.sender = req.user.id
-   }
    next()
 }
 

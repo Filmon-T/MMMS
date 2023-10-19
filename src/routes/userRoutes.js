@@ -9,23 +9,16 @@ const router = express.Router()
 
 router.post('/signup', authController.signup)
 router.post('/login', authController.login)
-router.get('/logout', authController.protect_vue, authController.logout)
+router.get('/logout', authController.ProtectRoutes, authController.logout)
 
-router.use(authController.protect) //Protects all routes after this middleware (requires login)
+router.use(authController.ProtectRoutes) //Protects all routes after this middleware (requires login)
 
-//!Move these routes to protedcted routes for admins ONLY
-
-//--------------------!Move these routes to protedcted routes for admins ONLY-------------------
 // TODO: Check restrict to if necessary
 
 router.get('/me', userController.getMe, userController.getUser)
-
-//Restricts all routes after this middleware to admins only
-
 router.patch('/updateMyPassword', authController.updatePassword)
 router.patch('/updateMe', userController.updateMe)
 router.patch('/deleteMe', userController.deleteMe)
-//////////////
 
 router.post('/forgotPassword', authController.forgotPassword)
 router.patch('/resetPassword/:token', authController.resetPassword)
