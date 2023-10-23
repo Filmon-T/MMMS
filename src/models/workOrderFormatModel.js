@@ -2,9 +2,10 @@ const mongoose = require('mongoose')
 
 const workOrderFormat = new mongoose.Schema(
    {
+      // Reference id for the EMF
       entranceDate: {
          type: String,
-         required: [true, 'Please enter the entrance date!'],
+         required: [true, 'Please enter the entrance date!'], // manually registered
       },
       activityDescription: {
          type: String,

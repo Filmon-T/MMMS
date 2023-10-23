@@ -14,12 +14,21 @@ const equipmentMaintenanceSchema = new mongoose.Schema(
          type: String,
          required: [true, 'Please enter the plate number!'],
       },
+      confirmdByEqAdmin: {
+         type: Boolean,
+         default: false,
+      }, //- action by eqadmin
       remark: {
-         type: String, // inspector updates this
+         type: String, // inspector updates this - and only this
       },
       // -------------
-      approvedBy: {
-         type: String, // inspector approves this -- when approved it goes to mechanic
+      approvedByInspector: {
+         type: Boolean, // inspector approves this -- when approved it goes to mechanic
+         default: false,
+      },
+      confirmdByMechanic: {
+         type: Boolean,
+         default: false,
       },
    },
    {

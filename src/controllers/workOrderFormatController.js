@@ -1,12 +1,10 @@
 const WorkOrderFormat = require('../models/workOrderFormatModel')
 const factory = require('./handlerFactory')
 
-exports.setUserIds = (req, res, next) => {
-   if (!req.body.user) {
-      req.body.user = req.user.id
-   }
-   next()
-}
+// exports.setUserIds = (req, res, next) => {
+//    req.body.user = req.body.user || req.user.id
+//    next()
+// }
 
 exports.getAllWorkOrderFormat = factory.getAll(WorkOrderFormat)
 exports.getWorkOrderFormat = factory.getOne(WorkOrderFormat)

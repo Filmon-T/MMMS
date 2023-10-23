@@ -22,7 +22,6 @@ const signToken = (id, role) => {
 const createSendToken = (user, statusCode, res) => {
    const token = signToken(user._id, user.role)
 
-   // Remove password from being despilayed in the output
    user.password = undefined
 
    res.status(statusCode).json({
