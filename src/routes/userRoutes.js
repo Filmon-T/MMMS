@@ -10,7 +10,7 @@ router.post('/login', authController.login)
 
 router.use(authController.ProtectRoutes) //Protects all routes after this middleware (requires login)
 
-// TODO: Check restrict to if necessary
+router.post('/eqAdmin/signup', authController.restrictTo('eqAdmin'), authController.signupEmployeeByEqAdmin)
 
 router.get('/me', userController.getMe, userController.getUser)
 router.patch('/updateMyPassword', authController.updatePassword)

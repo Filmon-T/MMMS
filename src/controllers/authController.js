@@ -353,3 +353,20 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
    // 4. Log user in, send JWT
    createSendToken(user, 200, res)
 })
+
+exports.signupEmployeeByEqAdmin = catchAsync(async (req, res, next) => {
+   const newUser = await User.create({
+      employeeName: req.body.employeeName,
+      agentId: req.body.agentId,
+      role: req.body.role,
+      phoneNumber: req.body.phoneNumber,
+      email: req.body.email,
+      password: req.body.password,
+      passwordConfirm: req.body.passwordConfirm,
+   })
+
+   res.status(201).json({
+      status: 'success',
+      doc: newUser,
+   })
+})
